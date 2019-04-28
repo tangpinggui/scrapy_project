@@ -52,11 +52,11 @@ class JdSpider(scrapy.Spider):
         next_url = response.xpath("//a[@class='pn-next']/@href").extract_first()
         if next_url is not None:
             next_url = urllib.parse.urljoin(response.url, next_url)
-        yield scrapy.Request(
-            next_url,
-            callback=self.parse_book_list,
-            meta={'item': item}
-        )
+            yield scrapy.Request(
+                next_url,
+                callback=self.parse_book_list,
+                meta={'item': item}
+            )
 
     def parse_book_price(self, response):
         item = response.meta['item']
